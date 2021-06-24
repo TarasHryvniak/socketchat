@@ -1,0 +1,49 @@
+.header_wrapper{
+    display: flex;
+    justify-content: space-between;
+    grid-area: header;
+    background-color: rgb(8, 245, 166);
+    padding: {
+        top: 1%;
+        bottom: 1%;
+        right: 2%;
+        left: 2%;
+    };
+    .chat_title{
+        font-size: 18px;
+    }
+    .auth_block{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: {
+            left: 3%;
+            right: 3%;
+        };
+        .user_name{
+            text-align: center;
+            font-size: 26px;
+        }
+        .logout{
+            color: rgb(19, 42, 73);
+            display:flex;
+            justify-content: center;
+            border-radius: 8%;
+            padding: {
+                left: 10px;
+                right: 10px;
+            };
+            &:hover{
+                background-color: rgb(39, 197, 158);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .header_wrapper{
+        .chat_title{
+            font-size: 12px;
+        }
+    }
+}

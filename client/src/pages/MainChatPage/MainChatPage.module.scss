@@ -1,0 +1,17 @@
+.mainPageWrapper{
+    display: grid;
+    grid-template-areas: 
+    'header header header header header header'
+    'users  chat   chat   chat   chat   chat'
+    'users  chat   chat   chat   chat   chat';
+    gap:2px;
+}
+
+@media screen and (max-width: 425px) {
+    .mainPageWrapper{
+        grid-template-areas:
+        'header header'
+        'users chat' 
+        'users chat';
+    }
+}

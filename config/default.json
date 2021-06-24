@@ -1,0 +1,7 @@
+{
+    "port": 5000,
+    "baseUrl": "http://localhost:5000",
+    "jwtSecret": "dfdfdvfgadreefddf",
+    "cookieSecret":"fefefds",
+    "mongoUri": "mongodb+srv://sochetAdmin:qwerty12345@cluster0.qzegc.mongodb.net/socketChat?retryWrites=true&w=majority"
+}

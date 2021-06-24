@@ -1,0 +1,85 @@
+.chatUsers{
+    grid-area: users;
+    background-color: rgb(48, 189, 158);
+    min-height: 100vh;
+    .user_wrapper{
+        background-color: rgb(15, 10, 6);
+        display: grid;
+        grid-template-rows: auto;
+        gap: 1px;
+        .user{
+            .user_info{
+                display: flex;
+                justify-content: space-between;
+                grid-template-columns: 3fr 3fr;
+                background-color: rgb(94, 248, 114);
+                padding: {
+                    left: 4%;
+                    right: 4%;
+                };
+                .user_name{
+                    color: blue;
+                    font-size: 16px;
+                    text-align: center;
+                }
+                .user_status{
+                    color: rgb(134, 74, 6);
+                }
+            }
+            .message_wrapper{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                color: black;
+                background-color: rgb(40, 180, 101);
+                padding: {
+                    left: 1%;
+                    right: 1%;
+                };
+                .message_new{
+                    font-size: 16px;
+                    font-weight: bolder;
+                    text-justify: center;
+                    color: rgb(11, 31, 216);
+                    border-radius: 100%;
+                    height: 50%;
+                }
+            }
+            &:hover{
+                .message_wrapper {
+                    background-color: darkgreen;
+                }
+                .user_info {
+                    background-color: rgb(0, 139, 12);
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 575px){
+    .chatUsers{
+        min-width: 40px;
+        .user_wrapper{
+            display: none;
+            z-index: 1000;
+            position: fixed;
+            left: 0;
+            .user{
+                display: none;
+            }
+        }
+        &:hover{
+            position: fixed;
+            min-width: 30%;
+            .user_wrapper{
+                position: unset;
+                display: grid;
+                .user{
+                    display: block;
+                }
+            }
+        }
+    }
+        
+}
