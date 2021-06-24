@@ -4,7 +4,7 @@ import { MainChatPage } from "./MainChatPage/MainChatPage"
 import Cookies from 'js-cookie'
 import RegisterPageContainer from "./AuthPage/RegisterPageContainer"
 
-export const useRoutes = () =>{
+export const Routes = () =>{
 
     const token = Cookies.get('token')
     if(token)
