@@ -45,23 +45,24 @@ async (req, res) => {
             sessions:[]
 
         })
+       
         const newSession = new Session({
             users:[user._id, user._id],
             messages:[]
         })
         await newSession.save()
-
-        user.sessions = [{
+    
+        user.sessions.push({
             ...newSession,
             lastMessage:{newMessageCount: 0}
-        }]
-
+        })
+    
         await user.save()
 
         res.status(201).json({ message:'registration successful' })
         
     } catch (e) {
-        res.status(500).json({ message: 'something wrong, please try again' })
+        res.status(500).json({ message: "something wrong, please try again" })
     }
 }
 )
