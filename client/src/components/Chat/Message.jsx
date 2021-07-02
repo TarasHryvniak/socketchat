@@ -1,6 +1,13 @@
 import style from './Chat.module.scss'
 
 const Message = (props) =>{
+    
+    /*let message = props.message.body
+
+    if(message.length > 60){
+        message = message
+    }*/
+
     return(
         <div className={style.message_wrapper}>
             <div className={props.messageStyle}>

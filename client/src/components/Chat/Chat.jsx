@@ -56,6 +56,7 @@ const Chat = (props) =>{
             <input
                  className = {style.messageInput}
                  type='text'
+                 placeholder='write your message here'
                  value={props.messageFieldValue}
                  onChange={onFieldChangeHandler}
                  onKeyPress={keyPressHendler}>

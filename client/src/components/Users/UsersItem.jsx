@@ -2,6 +2,11 @@ import { NavLink } from 'react-router-dom'
 import style from './Users.module.scss'
 
 const UsersItem = (props) =>{
+    let message = props.user.lastMessage||''
+
+    if(message.length > 10){
+        message = message.slice(0,15) + '...'
+    }
     return(
         <NavLink 
          to={`/users/${props.user.userId}`} 
@@ -11,7 +16,7 @@ const UsersItem = (props) =>{
                 <p className={style.user_status}>{props.user.connected ? 'online': 'offline'}</p>
             </div>
             <div className={style.message_wrapper}>
-                <p>{props.user.lastMessage||''}</p>
+                <p>{message}</p>
                 <p className={style.message_new}>{props.user.newMessageCount || ''}</p>
             </div>
         </NavLink>
