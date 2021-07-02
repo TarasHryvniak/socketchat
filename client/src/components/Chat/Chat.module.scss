@@ -17,8 +17,7 @@
     grid-template-rows: 15fr 1fr;
     .dialog_wrapper{
         display: grid;
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-        gap:2px;
+        grid-template-rows: 1fr;
         padding: 1px;
         background-color: rgb(72, 192, 146);
         .message_wrapper{

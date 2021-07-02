@@ -129,10 +129,8 @@ router.post('/send', async (req, res) =>{
         const currentUserId = jwt.verify(token, config.get('jwtSecret')).userId
         const currentUser = await User.findOne({_id: currentUserId})
 
-
-        const userId = currentSession.users.find(user => JSON.stringify(user.userId) !== JSON.stringify(currentUserId))
+        const userId = currentSession.users.find(user => toStr(user) !== toStr(currentUserId))
         userDialogId = usersDialogs.get(toStr(userId))
-            
         const isInSameDialog = toStr(userDialogId) === toStr(req.body.dialogId)
 
         //updating current session 
@@ -142,23 +140,24 @@ router.post('/send', async (req, res) =>{
             body: req.body.content,
             readed: isInSameDialog
         })
-        for(let userId of currentSession.users){
+        for(let Id of currentSession.users){
             let user = await User.findById(userId)
 
             //updating users in current session
             for(let session of user.sessions){
                 if(toStr(session._id) === toStr(currentSession._id)){
+                    let readed = isInSameDialog||toStr(Id)===toStr(currentUserId)
                     session.lastMessage = {
                         sendersName: currentUser.userName,
                         from: currentUserId,
                         body: req.body.content,
                         readed: isInSameDialog,
-                        newMessageCount: isInSameDialog ? 0 : session.lastMessage.newMessageCount+1
+                        newMessageCount: readed ? 0 : session.lastMessage.newMessageCount+1
                     }
                     break
                 }
             }
-            await User.updateOne({_id: userId},{sessions: [...user.sessions]})
+            await User.updateOne({_id: Id},{sessions: [...user.sessions]})
         }
     
         await Session.updateOne({_id: req.body.dialogId},{messages:[...currentSession.messages]})
