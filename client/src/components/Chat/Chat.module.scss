@@ -1,3 +1,14 @@
+%message_style {
+    word-break: break-all;
+    border-radius: 10%;
+    padding: {
+        top: 1%;
+        left: 2%;
+        right: 2%;
+    };
+    max-width: 70%;    
+}
+
 .Dialog{
     display: grid;
     flex-direction: column;
@@ -12,26 +23,13 @@
         background-color: rgb(72, 192, 146);
         .message_wrapper{
             .message{
-                word-break: break-all;
+                @extend %message_style;
                 float: right;
-                border-radius: 10%;
-                padding: {
-                    top: 1%;
-                    left: 2%;
-                    right: 2%;
-                };
-                max-width: 70%;
                 background-color: rgb(47, 173, 152);
             }
             .your_message{  
-                word-break: break-all;
+                @extend %message_style;
                 float: left;
-                border-radius: 10%;
-                padding: {
-                    top:1%;
-                    left: 2%;
-                    right: 2%;
-                };
                 background-color: rgb(21, 151, 112);
             }
         }
