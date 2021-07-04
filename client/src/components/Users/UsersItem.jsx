@@ -16,7 +16,7 @@ const UsersItem = (props) =>{
                 <p className={style.user_status}>{props.user.connected ? 'online': 'offline'}</p>
             </div>
             <div className={style.message_wrapper}>
-                <p>{message}</p>
+                {message||<p className={style.message_placeholder}>no messages yet</p>}
                 <p className={style.message_new}>{props.user.newMessageCount || ''}</p>
             </div>
         </NavLink>

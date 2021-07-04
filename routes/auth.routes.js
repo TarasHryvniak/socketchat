@@ -50,12 +50,14 @@ async (req, res) => {
             users:[user._id, user._id],
             messages:[]
         })
-        await newSession.save()
-    
+
         user.sessions.push({
-            ...newSession,
+            _id:newSession._id,
+            users:newSession.users,
+            messages:newSession.messages,
             lastMessage:{newMessageCount: 0}
         })
+        await newSession.save()
     
         await user.save()
 

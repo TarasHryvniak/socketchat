@@ -2,6 +2,8 @@
     grid-area: users;
     background-color: rgb(48, 189, 158);
     min-width: 20vw;
+    height: 90vh;
+    overflow-y: auto;
     .user_wrapper{
         background-color: rgb(15, 10, 6);
         display: grid;
@@ -38,6 +40,10 @@
                     left: 1%;
                     right: 1%;
                 };
+                .message_placeholder{
+                    color: rgb(69, 212, 145);
+                    font-style: italic;
+                }
                 .message_new{
                     font-size: 16px;
                     font-weight: bolder;
@@ -59,9 +65,14 @@
     }
 }
 
+@media screen and (max-width: 265px) {
+    .chatUsers{
+        min-width: 20px;
+    }
+}
+
 @media screen and (max-width: 575px){
     .chatUsers{
-        min-height: 100vh;
         min-width: 40px;
         .user_wrapper{
             display: none;
@@ -85,4 +96,6 @@
         }
     }
         
+
+
 }

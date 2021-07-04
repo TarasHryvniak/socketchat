@@ -126,7 +126,8 @@ socket.on('users', users =>{
         }
         return {...user}
     })
-    Users.sort((a, b) => {return (a.userName > b.userName ?  1:  -1)})
+    //Users.sort((a, b) => {return (a.userName > b.userName ?  1:  -1)})
+    debugger
     store.dispatch({type: actions.GET_USERS_SUCCEEDED, payload:{Users}})
 })
 socket.on('connect_error', error =>{

@@ -141,7 +141,7 @@ router.post('/send', async (req, res) =>{
             readed: isInSameDialog
         })
         for(let Id of currentSession.users){
-            let user = await User.findById(userId)
+            let user = await User.findById(Id)
 
             //updating users in current session
             for(let session of user.sessions){
@@ -165,7 +165,7 @@ router.post('/send', async (req, res) =>{
         res.status(200).json({
             messages: [...currentSession.messages]})
     }catch(error){
-        res.status(500).json({message: 'something wrong, please try again'})
+        res.status(500).json({message: error.message})
     }
 })
 

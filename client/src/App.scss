@@ -17,6 +17,19 @@
   };
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(35, 143, 89);
+  &:hover{
+      background-color:rgb(24, 100, 62) ;
+  }
+}
+::-webkit-scrollbar-track {
+  background-color: rgb(37, 175, 118);
+}
+
 @media screen and (max-width: 575px){
   .app-wrapper{
     margin:0;

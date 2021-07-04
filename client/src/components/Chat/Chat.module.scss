@@ -10,16 +10,21 @@
 }
 
 .Dialog{
-    display: grid;
+    display: flex;
     flex-direction: column;
     background-color: wheat;
     grid-area: chat;
-    grid-template-rows: 15fr 1fr;
+    height: 90vh;
+    .dialog_user{
+        background-color: rgb(44, 161, 116);
+    }
     .dialog_wrapper{
-        display: grid;
-        grid-template-rows: 1fr;
+        display: flex;
+        flex-direction: column;
         padding: 1px;
         background-color: rgb(72, 192, 146);
+        overflow-y: auto;
+        height: 80%;
         .message_wrapper{
             .message{
                 @extend %message_style;
@@ -34,14 +39,12 @@
         }
     }
     .messageInput{
+        height: 15%;
         background-color: rgb(25, 117, 102);
         border-width: 1px;
-        border-radius: 2%;
         border-color: rgb(27, 51, 37);
         font-size: 16px;
         font-weight:bolder;
-        position: sticky;
-        bottom: 0;
         padding: {
             left: 5px;
             right: 5px;
