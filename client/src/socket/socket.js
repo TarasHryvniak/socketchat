@@ -23,7 +23,7 @@ socket.on('user disconnected', id =>{
     store.dispatch({type: actions.GET_USERS_SUCCEEDED, payload:{Users}})
 })
 
-//changing user data when new user is connected
+//changing users data when new user is connected
 socket.on('user connected', (newUser)=>{
 
         for(let user of Users){
@@ -36,6 +36,7 @@ socket.on('user connected', (newUser)=>{
         }
         if(newUser){
             Users.push(newUser)
+            sortUsers()
         }
         store.dispatch({type: actions.GET_USERS_SUCCEEDED, payload:{Users}})
 })
@@ -126,11 +127,19 @@ socket.on('users', users =>{
         }
         return {...user}
     })
-    //Users.sort((a, b) => {return (a.userName > b.userName ?  1:  -1)})
+    sortUsers()
     store.dispatch({type: actions.GET_USERS_SUCCEEDED, payload:{Users}})
 })
 socket.on('connect_error', error =>{
     console.error(error)
 })
+
+const sortUsers = () =>{
+    Users = Users.sort((a, b) => {return (a.userName > b.userName ?  1:  -1)})
+    const currentUser = Users.find(user => user.userName.includes('(you)'))
+    const currentUserIndex = Users.indexOf(currentUser)
+    Users.splice(currentUserIndex, 1)
+    Users.unshift(currentUser)
+}
 
 export default socket
