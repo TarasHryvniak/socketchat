@@ -63,6 +63,27 @@ socket.on('dialog loaded', lastMessage =>{
     }
     store.dispatch({type: actions.GET_USERS_SUCCEEDED, payload:{Users}})
 })
+// updating users component for current user after sending message
+socket.on('message sended', ({dialogId, message, to}) =>{
+    for(let user of Users){
+        if(user.userId === to){
+            user.lastMessage = message.body
+            break
+        }
+    }
+    const currentUser = JSON.parse(localStorage.getItem('user'))
+    for(let session of currentUser.sessions){
+        if(session._id === dialogId){
+            session.lastMessage = {
+                ...session.lastMessage,
+                body: message.body
+            }
+            break
+        }
+    }
+    localStorage.setItem('user', JSON.stringify(currentUser))
+    store.dispatch({type: actions.GET_USERS_SUCCEEDED, payload:{Users}})
+})
 
 //receiving new message
 socket.on('private message', ({dialogId, message, from}) =>{

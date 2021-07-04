@@ -83,6 +83,11 @@ io.on('connection', (socket) =>{
     socket.on('private message',({ dialogId, message, to}) =>{
         for(user of users){
             if(user.userId === to){
+                socket.emit('message sended', {
+                    dialogId,
+                    message,
+                    to
+                  })
                 socket.to(user.socketId).emit('private message', {
                     dialogId,
                     message,
