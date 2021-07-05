@@ -15,16 +15,13 @@
     background-color: wheat;
     grid-area: chat;
     height: 90vh;
-    .dialog_user{
-        background-color: rgb(44, 161, 116);
-    }
     .dialog_wrapper{
         display: flex;
         flex-direction: column;
         padding: 1px;
         background-color: rgb(72, 192, 146);
         overflow-y: auto;
-        height: 80%;
+        height: 85%;
         .message_wrapper{
             .message{
                 @extend %message_style;

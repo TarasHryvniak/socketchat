@@ -11,8 +11,8 @@ const io = require('socket.io')(server,{
     }
 })
 
-const { InMemorySessionStore } = require("./sessionStore");
-const sessionStore = new InMemorySessionStore();
+//const { InMemorySessionStore } = require("./sessionStore");
+//const sessionStore = new InMemorySessionStore();
 
 app.use(express.json({extended: true}))
 app.use(cookieParser(config.get('cookieSecret')))
@@ -40,7 +40,7 @@ async function start(){
 }
 
 io.use((socket, next) =>{
-    const sessionId = socket.handshake.auth.sessionId
+   /* const sessionId = socket.handshake.auth.sessionId
     if(sessionId){
         const session = sessionStore.findSession(sessionId)
         if(session){
@@ -49,7 +49,7 @@ io.use((socket, next) =>{
             socket.users = socket.handshake.auth.users
             return next()
         }
-    }
+    }*/
     socket.sessionId = socket.handshake.auth.user.userId
     socket.user = socket.handshake.auth.user
     socket.users = [...socket.handshake.auth.users]
@@ -57,7 +57,7 @@ io.use((socket, next) =>{
 })
 
 io.on('connection', (socket) =>{
-    socket.join(socket.user.userId)
+    //socket.join(socket.user.userId)
     const users = [...socket.users]
     for(let [id, socket] of io.of('/').sockets){
         for(let user of users){
@@ -68,12 +68,12 @@ io.on('connection', (socket) =>{
             }
         }
     }
-    socket.emit('users', users)
     socket.emit('session', {
         sessionId: socket.sessionId,
         user: socket.user,
         users: socket.users
     })
+    socket.emit('users', users)
     socket.broadcast.emit('user connected', {
         ...socket.user,
         sessionId: socket.sessionId,
@@ -103,15 +103,18 @@ io.on('connection', (socket) =>{
     })
 
     socket.on("disconnect", async () => {
+        console.log('disconnect')
         const matchingSockets = await io.in(socket.sessionId).allSockets();
         const isDisconnected = matchingSockets.size === 0;
+        console.log('disconnected')
+        socket.emit("logout")
         if (isDisconnected) {
           socket.broadcast.emit("user disconnected", socket.user.userId);
-          sessionStore.saveSession(socket.sessionId, {
+         /* sessionStore.saveSession(socket.sessionId, {
             user: socket.user,
             sessionId: socket.sessionId,
             connected: false,
-          })
+          })*/
         }
       })
 })

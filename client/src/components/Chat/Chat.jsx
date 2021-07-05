@@ -50,7 +50,6 @@ const Chat = (props) =>{
 
     return(
         <div className = {style.Dialog}>
-            <div className={style.dialog_user}> USERNAME </div>
             <div className = {style.dialog_wrapper}>
             {messageItems}
             </div>
