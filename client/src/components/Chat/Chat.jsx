@@ -25,7 +25,6 @@ const Chat = (props) =>{
     const keyPressHendler = (event) =>{
         if(event.key === 'Enter'&& event.target.value){
             const dialogId = currentSession.id
-            console.log(dialogId)
             props.sendMessage({
                 dialogId,
                 to: id,
