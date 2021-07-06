@@ -64,7 +64,7 @@ async (req, res) => {
         res.status(201).json({ message:'registration successful' })
         
     } catch (e) {
-        res.status(500).json({ message: "something wrong, please try again" })
+        res.status(500).json({ message:"something went wrong, please try again" })
     }
 }
 )
@@ -129,7 +129,7 @@ async(req, res) => {
         users:[...users]})
     }catch(e){
         res.status(500).json({
-            message:"something wrong, please try again"})
+            message:"something went wrong, please try again"})
     }
 })
 
@@ -148,8 +148,7 @@ async (req, res) => {
         res.status(200).json({ isOk:true })
     } catch (e) {
         res.status(500).json({
-            isOk: true,
-            message: e.message})
+            message:"something went wrong, please try again"})
     }
 })
 

@@ -21,8 +21,9 @@ function* sendMessage (action){
        yield put({type: actions.MESSAGE_SEND_SUCCEEDED, payload:{ message:{...newMessage}}})
 
     } catch (e) {
-        console.error(e.response.data.message)
-        yield put({type: actions.ERROR, payload: e.response.data.message})
+        const message = e.response?e.response.data.message:e.message
+        console.error(message)
+        yield put({type: actions.ERROR, payload:message})
     }
 }
 

@@ -8,34 +8,41 @@ export const AuthPage = (props) => {
         props.changeAuthForm({[event.target.name]: event.target.value})
     }
 
-    const loginHandler = () =>{
+    const loginHandler = (e) =>{
+        e.preventDefault()
         props.login({form:props.authForm})
     }
 
     return(
-        <div className = {style.auth_wrapper}>
+        <div className={style.auth_wrapper}>
             <h4 className={style.auth_title}>LOGIN</h4>
-            <div className={style.auth_fields_wrapper}>
-                
+            <form className={style.auth_form} onSubmit={loginHandler}>
                 <input
+                    type='email'
+                    name='email'
                     className={style.auth_field}
-                    type = "textarea"
-                    name = 'email'
-                    value = {props.authForm.email}
+                    value={props.authForm.email}
                     onChange = {onFieldСhangeHandler}
-                    placeholder="input email"></input>
-                <input 
-                    className={style.auth_field}
-                    type = "password"
+                    pattern='[A-Za-z_.1-9]+[@][A-Za-z.]+'
+                    required
+                    placeholder='input email'></input>
+                <input
+                    type = 'password'
                     name = 'password'
-                    value = {props.authForm.password} 
-                    onChange = {onFieldСhangeHandler}  
+                    className={style.auth_field}
+                    value = {props.authForm.password}
+                    onChange = {onFieldСhangeHandler}
+                    pattern='[A-Za-z1-9]+' 
+                    required  
                     placeholder="input password"></input>
-            </div>
-            <div className={style.auth_button_wrapper}>
-                <button className = {style.auth_button} onClick={loginHandler}>Login</button>
-                <NavLink className = {style.auth_link} to='/register' >Register Now</NavLink>
-            </div>
+                <div className={style.auth_button_wrapper}>
+                    <input 
+                        type='submit' 
+                        className = {style.auth_button}
+                        value='Login'></input>
+                    <NavLink className = {style.auth_link} to='/register' >Register Now</NavLink>
+                </div>
+            </form>
         </div>
     )
 }

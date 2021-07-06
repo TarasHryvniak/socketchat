@@ -11,9 +11,9 @@ function* logout (){
         yield socket.disconnect()
         yield put({type: actions.LOGOUT_SUCCEEDED}) 
     } catch (e) {
-        console.log(e)
-        console.error(e.response.data.message)
-        yield put({type: actions.ERROR, payload: e.response.data.message})
+        const message = e.response?e.response.data.message:e.message
+        console.error(message)
+        yield put({type: actions.LOGIN_FAILED, payload:message})
     }
 }
 

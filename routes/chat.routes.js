@@ -111,7 +111,7 @@ router.get('/dialog/:userId', async (req, res) =>{
         
     } catch (e) {
         res.status(500).json({
-            message: 'something wrong, please try again'})
+            message:"something went wrong, please try again"})
     }
 })
 
@@ -165,7 +165,7 @@ router.post('/send', async (req, res) =>{
         res.status(200).json({
             messages: [...currentSession.messages]})
     }catch(error){
-        res.status(500).json({message: error.message})
+        res.status(500).json({message:"something went wrong, please try again"})
     }
 })
 

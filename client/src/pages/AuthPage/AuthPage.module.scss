@@ -21,7 +21,7 @@
             bottom: 3%;
         };
     }
-    .auth_fields_wrapper{
+    .auth_form{
         display: grid;
         .auth_field{
             float: left;
@@ -38,6 +38,15 @@
             margin: {
                 bottom:5%;
             };
+            &:invalid{
+                border-style: ridge;
+                border-width: 2px;
+                border-color: crimson;
+            }
+            &:focus:invalid{
+                text-decoration-line:line-through;
+                text-decoration-color: crimson;
+            }
         }
     }
     .auth_button_wrapper{
@@ -58,13 +67,14 @@
                 left: 3%;
                 right: 3%;
             }
-        }:hover{
-            background-color: rgb(2, 104, 78);
         }
         .auth_link{
-            color: rgb(19, 42, 73);
+            color: rgb(104, 117, 134);
             display:flex;
             justify-content: center;
+        }
+        :hover{
+            background-color: rgb(2, 104, 78);
         }
     }
 }

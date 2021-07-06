@@ -5,8 +5,10 @@ function* hideAlert(){
     try{
         yield delay(3000)
         yield put({type: actions.HIDE_ALERT})
-    } catch (error) {
-        console.log(error)
+    } catch (e) {
+        const message = e.response?e.response.data.message:e.message
+        console.error(message)
+        yield put({type: actions.ERROR, payload:message})
     }
 }
 

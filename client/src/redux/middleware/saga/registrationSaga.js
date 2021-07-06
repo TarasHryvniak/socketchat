@@ -8,8 +8,9 @@ function* registration(action){
         yield axios.post('api/auth/register', {...action.payload.form})
         yield put({type: actions.REGISTRATION_SUCCEEDED})
     } catch (e) {
-        console.error(e.response.data.message)
-        yield put({type: actions.REGISTRATION_FAILED, payload: e.response.data.message})
+        const message = e.response?e.response.data.message:e.message
+        console.error(message)
+        yield put({type: actions.REGISTRATION_FAILED, payload:message})
     }
 }
 
