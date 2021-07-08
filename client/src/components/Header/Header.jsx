@@ -7,12 +7,12 @@ const Header = (props) =>{
 
     const history = useHistory()
 
-    useEffect(() => {
+    useEffect((relogin = props.relogin) => {
         const user = localStorage.getItem('user')
         if(user){
-            props.relogin(JSON.parse(user))
+            relogin(JSON.parse(user))
         }
-    }, [])
+    }, [props.relogin])
 
     const logoutHandler = () =>{
         props.logout()

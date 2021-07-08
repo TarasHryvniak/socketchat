@@ -10,7 +10,7 @@ export const Routes = () =>{
     if(token)
         return(
             <Switch>
-                <Route path='/' exact>
+                <Route path='/' >
                     <MainChatPage />
                 </Route>
                 <Redirect to='/' />

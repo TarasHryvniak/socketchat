@@ -3,9 +3,9 @@ import style from './Alert.module.scss'
 
 const Alert = (props) =>{
 
-    useEffect(() => {
-        props.hideAlert()
-    }, [])
+    useEffect((hideAlert = props.hideAlert) => {
+        hideAlert()
+    }, [props.hideAlert])
 
     let messageStyle = style.alert_message
     if(props.isError){

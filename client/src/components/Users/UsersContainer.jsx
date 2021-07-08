@@ -4,7 +4,7 @@ import ChatUsers from "./Users"
 const mapStateToProps = (state) =>{
     return{
         users:[...state.ChatPage.users],
-        currentUser: state.Auth.user.userId
+        currentSession: state.ChatPage.currentSession
     }
 }
 

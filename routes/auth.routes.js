@@ -121,7 +121,7 @@ async(req, res) => {
         )
     
         res.cookie('token',`${token}`,{signed: true})
-        res.status(200).json({token, isOk: true, user:{
+        res.status(200).json({user:{
             userId: user._id,
             userName:user.userName,
             sessions: user.sessions
@@ -140,12 +140,12 @@ async (req, res) => {
     try {
         if(req.signedCookies.token){
             const token = req.signedCookies.token
-            const currentUserId = jwt.verify(token, config.get('jwtSecret')).userId
+            const currentUserId = jwt.decode(token, config.get('jwtSecret')).userId
             usersDialogs.delete(JSON.stringify(currentUserId))
         }
 
         res.clearCookie('token')
-        res.status(200).json({ isOk:true })
+        res.status(200).json({})
     } catch (e) {
         res.status(500).json({
             message:"something went wrong, please try again"})

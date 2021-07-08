@@ -18,7 +18,11 @@
     .dialog_wrapper{
         display: flex;
         flex-direction: column;
-        padding: 1px;
+        padding: {
+            top: 5px;
+            left: 3px;
+            right: 3px;
+        }
         background-color: rgb(72, 192, 146);
         overflow-y: auto;
         height: 85%;

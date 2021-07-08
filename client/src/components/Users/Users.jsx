@@ -11,16 +11,20 @@ const ChatUsers = (props) =>{
         )
     }
     
-    const users = props.users.map(user =>
+    const users = props.users.map(user =>{
+        const selected = props.currentSession === user.sessionId
+        return(
             <UsersItem 
+            isSelected = {selected}
             key = {user.userId}
             user = {user}/>)
+    })
 
     return(
         <div className={style.chatUsers}>
-            <div className={style.user_wrapper} id='users'>
+            <ul className={style.user_wrapper} id='users'>
                 {users}
-            </div>
+            </ul>
         </div>
     )
 }

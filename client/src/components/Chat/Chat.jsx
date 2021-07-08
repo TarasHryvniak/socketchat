@@ -11,7 +11,6 @@ const Chat = (props) =>{
             return JSON.parse(localStorage.getItem('currentSession'))
         },[])()
 
-
     useEffect(() => {
         // loading another chat or reloading current
         if(!currentSession||currentSession.id!==id){
@@ -36,16 +35,20 @@ const Chat = (props) =>{
     const onFieldChangeHandler = (event) =>{
         props.changeMessageFiled(event.target.value)
     }
-       const messageItems = props.messages.map(message => {
-        let messageStyle = style.message
-        if(message.from === id){
-            messageStyle = style.your_message
-        }
-        return (<Message 
-                key={message._id} 
-                messageStyle={messageStyle}
-                message={message} />)
-       })
+
+    let messageItems
+    if(currentSession){
+        messageItems = props.messages.map(message => {
+            let messageStyle = style.message
+            if(message.from === id){
+                messageStyle = style.your_message
+            }
+            return (<Message 
+                    key={message._id} 
+                    messageStyle={messageStyle}
+                    message={message} />)
+           })
+    }
 
     return(
         <div className = {style.Dialog}>
