@@ -42,9 +42,34 @@ socket.on('user connected', (newUser)=>{
 })
 
 // updating Users component data when some of the dialogs is loaded and "reading" new messages  
-socket.on('dialog loaded', lastMessage =>{
+socket.on('dialog loaded', ({dialogWithId , lastMessage, sessionId}) =>{
     for(let user of Users){
-        if(user.userId === lastMessage.from){
+        if(user.userId === dialogWithId){
+            user.haveNewMessages = false
+            user.newMessageCount = 0
+            user.lastMessage = lastMessage.body||''
+            const currentUser = JSON.parse(localStorage.getItem('user'))
+            if(!user.sessionId){
+                user.sessionId = sessionId
+                currentUser.sessions.push({
+                    _id: sessionId,
+                    lastMessage: {...lastMessage},
+                    users: [currentUser.userId, dialogWithId]
+                })
+            }
+            for(let session of currentUser.sessions){
+                if(session.users.includes(lastMessage.from)){
+                    session.lastMessage = {
+                        ...session.lastMessage,
+                        newMessageCount: 0,
+                        readed: true
+                    }
+                }
+            }
+            localStorage.setItem('user', JSON.stringify(currentUser))
+            break
+        }
+        /*if(user.userId === lastMessage.from){
             user.haveNewMessages = false
             user.newMessageCount = 0
             const currentUser = JSON.parse(localStorage.getItem('user'))
@@ -59,7 +84,7 @@ socket.on('dialog loaded', lastMessage =>{
             }
             localStorage.setItem('user', JSON.stringify(currentUser))
             break
-        }
+        }*/
     }
     store.dispatch({type: actions.GET_USERS_SUCCEEDED, payload:{Users}})
 })
@@ -138,7 +163,7 @@ socket.on('users', users =>{
             if(session.users.includes(user.userId)){
                 user.sessionId = session._id
                 if(session.lastMessage){
-                    let lastMessage = session.lastMessage
+                    const lastMessage = session.lastMessage
                     user.lastMessage = lastMessage.body
                     user.newMessageCount = lastMessage.newMessageCount
                     user.haveNewMessages = !lastMessage.readed&&lastMessage.from === user.userId

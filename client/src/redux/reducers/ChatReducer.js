@@ -9,6 +9,11 @@ const initialState = {
 
 const ChatReducer = (state = initialState ,action) =>{
     switch (action.type) {
+        case actions.LOGOUT_SUCCEEDED:{
+            return{
+                ...initialState,
+            }
+        }
         case actions.GET_USERS_SUCCEEDED:{
             return {
                 ...state,

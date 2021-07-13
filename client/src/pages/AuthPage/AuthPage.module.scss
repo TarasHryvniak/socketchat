@@ -38,13 +38,8 @@
             margin: {
                 bottom:5%;
             };
-            &:invalid{
-                border-style: ridge;
-                border-width: 2px;
-                border-color: crimson;
-            }
             &:focus:invalid{
-                text-decoration-line:line-through;
+                text-decoration-line:underline;
                 text-decoration-color: crimson;
             }
         }

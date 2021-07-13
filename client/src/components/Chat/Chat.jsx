@@ -13,7 +13,7 @@ const Chat = (props) =>{
 
     useEffect(() => {
         // loading another chat or reloading current
-        if(!currentSession||currentSession.id!==id){
+        if(!currentSession){
             props.getDialog({userId: id})
         }
         else{

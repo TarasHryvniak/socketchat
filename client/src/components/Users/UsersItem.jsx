@@ -1,9 +1,15 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory} from 'react-router-dom'
 import style from './Users.module.scss'
 
 const UsersItem = (props) =>{
+
+    const history = useHistory()
+
     const onClickHandler = () =>{
-        localStorage.removeItem('currentSession')
+        const isSameDialog = history.location.pathname.includes(props.user.userId)
+        if(!isSameDialog){
+            localStorage.removeItem('currentSession')
+        }
     }
 
     let message = props.user.lastMessage||''

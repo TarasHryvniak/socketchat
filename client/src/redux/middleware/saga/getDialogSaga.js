@@ -11,7 +11,11 @@ function* getDialog(action){
         })
         const currentSession = yield {...response.data.session}
         yield localStorage.setItem('currentSession',JSON.stringify(currentSession))
-        yield socket.emit('dialog loaded', response.data.lastMessage)
+        yield socket.emit('dialog loaded', {
+            dialogWithId: action.payload.userId,
+            lastMessage: response.data.lastMessage,
+            sessionId: response.data.session.id,
+        })
 
         yield put({type: actions.GET_DIALOG_SUCCEEDED, payload:{...currentSession}})
     } catch (e) {

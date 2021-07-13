@@ -13,6 +13,7 @@ const ChatUsers = (props) =>{
     
     const users = props.users.map(user =>{
         const selected = props.currentSession === user.sessionId
+        console.log(user.userName, selected)
         return(
             <UsersItem 
             isSelected = {selected}

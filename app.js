@@ -103,8 +103,8 @@ io.on('connection', (socket) =>{
         }
     })
 
-    socket.on('dialog loaded', lastMessage =>{
-        socket.emit('dialog loaded', lastMessage)
+    socket.on('dialog loaded', (payload) =>{
+        socket.emit('dialog loaded', {...payload})
     })
 
     socket.on("disconnect", async () => {
