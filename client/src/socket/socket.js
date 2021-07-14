@@ -69,22 +69,6 @@ socket.on('dialog loaded', ({dialogWithId , lastMessage, sessionId}) =>{
             localStorage.setItem('user', JSON.stringify(currentUser))
             break
         }
-        /*if(user.userId === lastMessage.from){
-            user.haveNewMessages = false
-            user.newMessageCount = 0
-            const currentUser = JSON.parse(localStorage.getItem('user'))
-            for(let session of currentUser.sessions){
-                if(session.users.includes(lastMessage.from)){
-                    session.lastMessage = {
-                        ...session.lastMessage,
-                        newMessageCount: 0,
-                        readed: true
-                    }
-                }
-            }
-            localStorage.setItem('user', JSON.stringify(currentUser))
-            break
-        }*/
     }
     store.dispatch({type: actions.GET_USERS_SUCCEEDED, payload:{Users}})
 })
@@ -181,10 +165,10 @@ socket.on('connect_error', error =>{
 })
 
 const sortUsers = () =>{
-    Users = Users.sort((a, b) => {return (a.userName > b.userName ?  1:  -1)})
     const currentUser = Users.find(user => user.userName.includes('(you)'))
     const currentUserIndex = Users.indexOf(currentUser)
     Users.splice(currentUserIndex, 1)
+    Users = Users.sort((a, b) => {return (a.userName > b.userName ?  1:  -1)})
     Users.unshift(currentUser)
 }
 
