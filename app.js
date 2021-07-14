@@ -11,9 +11,6 @@ const io = require('socket.io')(server,{
     }
 })
 
-const { InMemorySessionStore } = require("./sessionStore");
-const sessionStore = new InMemorySessionStore();
-
 app.use(express.json({extended: true}))
 app.use(cookieParser(config.get('cookieSecret')))
 app.use('/api/auth/', require('./routes/auth.routes'))
@@ -41,16 +38,6 @@ async function start(){
 }
 
 io.use((socket, next) =>{
-    const sessionId = socket.handshake.auth.sessionId
-    if(sessionId){
-        const session = sessionStore.findSession(sessionId)
-        if(session){
-            socket.sessionId = sessionId
-            socket.user = session.user
-            socket.users = socket.handshake.auth.users
-            return next()
-        }
-    }
     socket.sessionId = socket.handshake.auth.user.userId
     socket.user = socket.handshake.auth.user
     socket.users = [...socket.handshake.auth.users]
@@ -58,7 +45,6 @@ io.use((socket, next) =>{
 })
 
 io.on('connection', (socket) =>{
-    socket.join(socket.user.userId)
     users = [...socket.users]
     for(let [id, socket] of io.of('/').sockets){
         for(let user of users){
@@ -86,7 +72,6 @@ io.on('connection', (socket) =>{
 
     socket.on('private message',({ dialogId, message, to}) =>{
         for(user of users){
-            console.log(user.socketId)
             if(user.userId === to){
                 socket.emit('message sended', {
                     dialogId,
@@ -112,11 +97,6 @@ io.on('connection', (socket) =>{
         const isDisconnected = matchingSockets.size === 0;
         if (isDisconnected) {
           socket.broadcast.emit("user disconnected", socket.user.userId);
-          sessionStore.saveSession(socket.sessionId, {
-            user: socket.user,
-            sessionId: socket.sessionId,
-            connected: false,
-          })
         }
       })
 })
