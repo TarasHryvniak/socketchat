@@ -27,7 +27,8 @@ async (req, res) => {
         }
 
         const {email, password, userName} = req.body
-        const candidate = await User.findOne({ email })
+        const lowerEmail = email.toLowerCase()
+        const candidate = await User.findOne({ email: lowerEmail})
 
         if(candidate){
             return res.status(400).json({
@@ -39,7 +40,7 @@ async (req, res) => {
 
         //creating new user and adding a session with self
         const user = new User({
-            email,
+            email: lowerEmail,
             password: hashedPassword,
             userName: userName,
             sessions:[]
@@ -88,8 +89,9 @@ async(req, res) => {
         }
 
         const {email, password} = req.body
+        const lowerEmail = email.toLowerCase()
 
-        const user = await User.findOne({email})
+        const user = await User.findOne({email: lowerEmail})
 
         if (!user){
             return res.status(400).json({
