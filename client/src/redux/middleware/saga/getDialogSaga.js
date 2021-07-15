@@ -1,14 +1,11 @@
 import { put } from "@redux-saga/core/effects";
 import socket from "../../../socket/socket";
 import { actions } from "../../actions/ChatActions";
-
-const axios = require('axios')
+import client from '../../../api/client/client';
 
 function* getDialog(action){
     try {
-        const response = yield axios.get(`/api/chat/dialog/${action.payload.userId}`,{
-            withCredantials: true
-        })
+        const response = yield client.get(`/api/chat/dialog/${action.payload.userId}`)
         const currentSession = yield {...response.data.session}
         yield localStorage.setItem('currentSession',JSON.stringify(currentSession))
         yield socket.emit('dialog loaded', {

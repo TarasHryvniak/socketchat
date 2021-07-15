@@ -1,14 +1,12 @@
 import { put } from "@redux-saga/core/effects";
 import socket from "../../../socket/socket";
 import { actions } from "../../actions/ChatActions";
-
-const axios = require('axios')
+import client from '../../../api/client/client';
 
 function* login(action){
     try {
-        const response = yield axios.post('api/auth/login',
+        const response = yield client.post('api/auth/login',
         {
-            withCredantials: true,
             ...action.payload.form
         })
         yield socket.auth = {

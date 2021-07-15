@@ -1,11 +1,10 @@
 import {  put } from "@redux-saga/core/effects"
 import { actions } from "../../actions/ChatActions"
-
-const axios = require('axios')
+import client from '../../../api/client/client';
 
 function* registration(action){
     try {
-        yield axios.post('api/auth/register', {...action.payload.form})
+        yield client.post('api/auth/register', {...action.payload.form})
         yield put({type: actions.REGISTRATION_SUCCEEDED})
     } catch (e) {
         const message = e.response?e.response.data.message:e.message
