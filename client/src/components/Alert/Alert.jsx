@@ -13,7 +13,7 @@ const Alert = (props) =>{
     }
     return(
         <div className={style.alert_wrapper}>
-            <h4 className={messageStyle}>{props.message}</h4>
+            <h4 className={messageStyle}>{props.message||'something went wrong, please try again'}</h4>
         </div> 
     
     )}
