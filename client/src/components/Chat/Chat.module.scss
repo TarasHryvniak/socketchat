@@ -12,7 +12,6 @@
 .Dialog{
     display: flex;
     flex-direction: column;
-    background-color: wheat;
     grid-area: chat;
     height: 90vh;
     .dialog_wrapper{
@@ -23,25 +22,25 @@
             left: 3px;
             right: 3px;
         }
-        background-color: rgb(72, 192, 146);
+        background-color: rgb(46, 99, 179);
         overflow-y: auto;
         height: 85%;
         .message_wrapper{
             .message{
                 @extend %message_style;
                 float: right;
-                background-color: rgb(47, 173, 152);
+                background-color: rgb(34, 112, 214);
             }
             .your_message{  
                 @extend %message_style;
                 float: left;
-                background-color: rgb(21, 151, 112);
+                background-color: rgb(21, 62, 151);
             }
         }
     }
     .messageInput{
         height: 15%;
-        background-color: rgb(25, 117, 102);
+        background-color: rgb(84, 183, 223);
         border-width: 1px;
         border-color: rgb(27, 51, 37);
         font-size: 16px;

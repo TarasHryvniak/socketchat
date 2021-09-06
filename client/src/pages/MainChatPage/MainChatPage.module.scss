@@ -1,9 +1,12 @@
 .mainPageWrapper{
     display: grid;
+    background-color: rgb(120, 131, 189);
     grid-template-areas: 
     'header header header header header header'
     'users  chat   chat   chat   chat   chat'
     'users  chat   chat   chat   chat   chat';
+    border: rgb(0, 4, 255);
+    border-style: solid;
 }
 
 @media screen and (max-width: 425px) {

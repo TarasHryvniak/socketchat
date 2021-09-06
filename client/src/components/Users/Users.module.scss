@@ -1,6 +1,6 @@
 .chatUsers{
     grid-area: users;
-    background-color: rgb(25, 99, 83);
+    background-color: rgb(35, 75, 206);
     min-width: 20vw;
     height: 90vh;
     overflow-y: auto;
@@ -13,18 +13,17 @@
                 display: flex;
                 justify-content: space-between;
                 grid-template-columns: 3fr 3fr;
-                background-color: rgb(94, 248, 114);
                 padding: {
                     left: 4%;
                     right: 4%;
                 };
                 .user_name{
-                    color: blue;
+                    color: rgb(228, 222, 222);
                     font-size: 14px;
                     text-align: center;
                 }
                 .user_status{
-                    color: rgb(134, 74, 6);
+                    color: rgb(110, 134, 6);
                     font-size:12px;
                     
                 }
@@ -34,13 +33,12 @@
                 flex-direction: row;
                 justify-content: space-between;
                 color: black;
-                background-color: rgb(40, 180, 101);
                 padding: {
                     left: 1%;
                     right: 1%;
                 };
                 .message_placeholder{
-                    color: rgb(69, 212, 145);
+                    color: rgb(69, 131, 212);
                     font-style: italic;
                 }
                 .message_new{
@@ -53,38 +51,15 @@
                 }
             }
             &:hover{
-                .message_wrapper {
-                    background-color: darkgreen;
-                }
-                .user_info {
-                    background-color: rgb(0, 139, 12);
-                }
+                background-color: rgb(0, 81, 255)
             }
         }
         .selected_user{
             @extend .user;
-            .message_wrapper {
-                border-width: 3xp;
-                border-bottom-style: solid;
-                border-bottom-left-radius: 10px;
-                border-color: yellow;
-                background-color: rgb(72, 192, 146);
-            }
-            .user_info {
-                border-width: 3xp;
-                border-top-style: solid;
-                border-top-left-radius: 10px;
-                border-color: yellow;
-                background-color: rgb(72, 192, 146);
-            }
-            &:hover{
-                .message_wrapper{
-                    background-color: rgb(41, 129, 107);
-                }
-                .user_info{
-                    background-color: rgb(41, 129, 107);
-                }
-            }
+            background-color: rgb(46, 99, 179);
+            border-color: darkblue;
+            border-top-style: solid;
+            border-bottom-style: solid;
         }
     }
 }
